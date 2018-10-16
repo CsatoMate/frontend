@@ -49,14 +49,16 @@ class DefaultHeader extends Component {
             <NavLink href="#"><i className="icon-location-pin"></i></NavLink>
           </NavItem>*/}
           <AppHeaderDropdown direction="down">
-            <DropdownToggle nav>
-              {/*<i className="fa fa-user-o fa-lg mt-4"/>*/}
-              <i className="icon-user"></i>
+            <DropdownToggle nav >
+
+              <i className="icon-user" style={{"fontSize":"2rem"}}/>
+
+              {/*<i className="fa fa-user-o fa-2x mt-4" />*/}
             </DropdownToggle>
             <DropdownMenu right style={{ right: 'auto' }}>
               <DropdownItem header tag="div" className="text-center"><strong>Settings</strong></DropdownItem>
-              <DropdownItem><i className="fa fa-wrench"></i> Settings</DropdownItem>
-              <DropdownItem><i className="fa fa-lock"></i> Logout</DropdownItem>
+              <DropdownItem><i className="fa fa-wrench"/> Settings</DropdownItem>
+              <DropdownItem><i className="fa fa-lock"/> Logout</DropdownItem>
             </DropdownMenu>
           </AppHeaderDropdown>
         </Nav>

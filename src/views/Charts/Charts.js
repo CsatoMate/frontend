@@ -175,6 +175,8 @@ class Charts extends Component {
         <CardColumns className="cols-2">
           <Card>
             <CardHeader>
+              <i className="icon-speedometer"/>
+
               Temperature Line Chart
               <div className="card-header-actions">
               <ButtonDropdown isOpen={this.state.dropdownOpen[0]} toggle={() => { this.toggle(0); }}>

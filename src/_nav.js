@@ -3,13 +3,9 @@ export default {
     {
       name: 'Dashboard',
       url: '/dashboard',
-      icon: 'icon-speedometer',
-      badge: {
-        variant: 'info',
-        text: 'NEW',
-      },
+      icon: 'icon-home',
     },
-    {
+/*    {
       title: true,
       name: 'Theme',
       wrapper: {            // optional wrapper object
@@ -17,8 +13,8 @@ export default {
         attributes: {}        // optional valid JS object with JS API naming ex: { className: "my-class", style: { fontFamily: "Verdana" }, id: "my-id"}
       },
       class: ''             // optional class names space delimited list for title item ex: "text-center"
-    },
-    {
+    },*/
+/*    {
       name: 'Colors',
       url: '/theme/colors',
       icon: 'icon-drop',
@@ -35,8 +31,8 @@ export default {
         element: '',
         attributes: {},
       },
-    },
-    {
+    },*/
+    /*{
       name: 'Base',
       url: '/base',
       icon: 'icon-puzzle',
@@ -149,17 +145,17 @@ export default {
           icon: 'icon-cursor',
         },
       ],
-    },
+    },*/
     {
-      name: 'Charts',
+      name: 'Statements',
       url: '/charts',
-      icon: 'icon-pie-chart',
+      icon: 'fa fa-line-chart fa-lg mt-4', //'fa fa-thermometer fa-lg mt-4', //'icon-pie-chart',
     },
     {
-      name: 'Icons',
+      name: 'Devices',
       url: '/icons',
-      icon: 'icon-star',
-      children: [
+      icon: 'fa fa-cogs fa-lg mt-4',
+      /*children: [
         {
           name: 'CoreUI Icons',
           url: '/icons/coreui-icons',
@@ -188,7 +184,7 @@ export default {
           url: '/icons/simple-line-icons',
           icon: 'icon-star',
         },
-      ],
+      ],*/
     },
     {
       name: 'Notifications',
@@ -254,19 +250,6 @@ export default {
           icon: 'icon-star',
         },
       ],
-    },
-    {
-      name: 'Download CoreUI',
-      url: 'http://coreui.io/react/',
-      icon: 'icon-cloud-download',
-      class: 'mt-auto',
-      variant: 'success',
-    },
-    {
-      name: 'Try CoreUI PRO',
-      url: 'http://coreui.io/pro/react/',
-      icon: 'icon-layers',
-      variant: 'danger',
     },
   ],
 };
