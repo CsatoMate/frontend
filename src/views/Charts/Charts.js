@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { Bar, Doughnut, Line, Pie, Polar, Radar } from 'react-chartjs-2';
-import { Card, CardBody, CardColumns, CardHeader } from 'reactstrap';
+import { Card, CardBody, CardColumns, CardHeader, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem, } from 'reactstrap';
 import { CustomTooltips } from '@coreui/coreui-plugin-chartjs-custom-tooltips';
 
 const line = {
   labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
   datasets: [
     {
-      label: 'My First dataset',
+      label: 'Temperature',
       fill: false,
       lineTension: 0.1,
       backgroundColor: 'rgba(75,192,192,0.4)',
@@ -23,14 +23,14 @@ const line = {
       pointHoverBackgroundColor: 'rgba(75,192,192,1)',
       pointHoverBorderColor: 'rgba(220,220,220,1)',
       pointHoverBorderWidth: 2,
-      pointRadius: 1,
+      pointRadius: 3,
       pointHitRadius: 10,
       data: [65, 59, 80, 81, 56, 55, 40],
     },
   ],
 };
 
-const bar = {
+/*const bar = {
   labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
   datasets: [
     {
@@ -141,7 +141,7 @@ const polar = {
     'Grey',
     'Blue',
   ],
-};
+};*/
 
 const options = {
   tooltips: {
@@ -149,21 +149,52 @@ const options = {
     custom: CustomTooltips
   },
   maintainAspectRatio: false
-}
+};
 
 class Charts extends Component {
+
+  constructor(props) {
+    super(props);
+
+    this.toggle = this.toggle.bind(this);
+    this.state = {
+      dropdownOpen: new Array(19).fill(false),
+    };
+  }
+
+  toggle(i) {
+    const newArray = this.state.dropdownOpen.map((element, index) => { return (index === i ? !element : false); });
+    this.setState({
+      dropdownOpen: newArray,
+    });
+  }
+
   render() {
     return (
       <div className="animated fadeIn">
         <CardColumns className="cols-2">
           <Card>
             <CardHeader>
-              Line Chart
+              Temperature Line Chart
               <div className="card-header-actions">
+              <ButtonDropdown isOpen={this.state.dropdownOpen[0]} toggle={() => { this.toggle(0); }}>
+                <DropdownToggle caret>
+                  Devices Dropdown
+                </DropdownToggle>
+                <DropdownMenu right>
+                  <DropdownItem header>Header</DropdownItem>
+                  <DropdownItem disabled>Device 1.</DropdownItem>
+                  <DropdownItem>Device 2.</DropdownItem>
+                  <DropdownItem>Device 3.</DropdownItem>
+                </DropdownMenu>
+              </ButtonDropdown>
+              </div>
+              <br/>
+{/*              <div className="card-header-actions">
                 <a href="http://www.chartjs.org" className="card-header-action">
                   <small className="text-muted">docs</small>
                 </a>
-              </div>
+              </div>*/}
             </CardHeader>
             <CardBody>
               <div className="chart-wrapper">
@@ -171,7 +202,7 @@ class Charts extends Component {
               </div>
             </CardBody>
           </Card>
-          <Card>
+{/*          <Card>
             <CardHeader>
               Bar Chart
               <div className="card-header-actions">
@@ -185,8 +216,8 @@ class Charts extends Component {
                 <Bar data={bar} options={options} />
               </div>
             </CardBody>
-          </Card>
-          <Card>
+          </Card>*/}
+         {/* <Card>
             <CardHeader>
               Doughnut Chart
               <div className="card-header-actions">
@@ -245,7 +276,7 @@ class Charts extends Component {
                 <Polar data={polar} options={options}/>
               </div>
             </CardBody>
-          </Card>
+          </Card>*/}
         </CardColumns>
       </div>
     );

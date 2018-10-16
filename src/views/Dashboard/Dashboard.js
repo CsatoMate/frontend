@@ -24,11 +24,11 @@ import Widget03 from '../../views/Widgets/Widget03'
 import { CustomTooltips } from '@coreui/coreui-plugin-chartjs-custom-tooltips';
 import { getStyle, hexToRgba } from '@coreui/coreui/dist/js/coreui-utilities'
 
-const brandPrimary = getStyle('--primary')
-const brandSuccess = getStyle('--success')
-const brandInfo = getStyle('--info')
-const brandWarning = getStyle('--warning')
-const brandDanger = getStyle('--danger')
+const brandPrimary = getStyle('--primary');
+const brandSuccess = getStyle('--success');
+const brandInfo = getStyle('--info');
+const brandWarning = getStyle('--warning');
+const brandDanger = getStyle('--danger');
 
 // Card Chart 1
 const cardChartData1 = {
@@ -85,7 +85,7 @@ const cardChartOpts1 = {
       hoverRadius: 4,
     },
   }
-}
+};
 
 
 // Card Chart 2
@@ -480,7 +480,7 @@ class Dashboard extends Component {
 
     return (
       <div className="animated fadeIn">
-        <Row>
+{/*        <Row>
           <Col xs="12" sm="6" lg="3">
             <Card className="text-white bg-info">
               <CardBody className="pb-0">
@@ -577,7 +577,7 @@ class Dashboard extends Component {
               </div>
             </Card>
           </Col>
-        </Row>
+        </Row>*/}
         <Row>
           <Col>
             <Card>
@@ -635,7 +635,7 @@ class Dashboard extends Component {
           </Col>
         </Row>
 
-        <Row>
+       {/* <Row>
           <Col xs="6" sm="6" lg="3">
             <Widget03 dataBox={() => ({ variant: 'facebook', friends: '89k', feeds: '459' })} >
               <div className="chart-wrapper">
@@ -706,9 +706,9 @@ class Dashboard extends Component {
               </div>
             </div>
           </Col>
-        </Row>
+        </Row>*/}
 
-        <Row>
+       {/* <Row>
           <Col>
             <Card>
               <CardHeader>
@@ -1148,7 +1148,7 @@ class Dashboard extends Component {
               </CardBody>
             </Card>
           </Col>
-        </Row>
+        </Row>*/}
       </div>
     );
   }

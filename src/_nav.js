@@ -212,7 +212,7 @@ export default {
         },
       ],
     },
-    {
+/*    {
       name: 'Widgets',
       url: '/widgets',
       icon: 'icon-calculator',
@@ -220,7 +220,7 @@ export default {
         variant: 'info',
         text: 'NEW',
       },
-    },
+    },*/
     {
       divider: true,
     },

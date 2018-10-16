@@ -167,10 +167,10 @@ const Typography = Loadable({
   loading: Loading,
 });
 
-const Widgets = Loadable({
+/*const Widgets = Loadable({
   loader: () => import('./views/Widgets/Widgets'),
   loading: Loading,
-});
+});*/
 
 const Users = Loadable({
   loader: () => import('./views/Users/Users'),
@@ -223,7 +223,7 @@ const routes = [
   { path: '/notifications/alerts', name: 'Alerts', component: Alerts },
   { path: '/notifications/badges', name: 'Badges', component: Badges },
   { path: '/notifications/modals', name: 'Modals', component: Modals },
-  { path: '/widgets', name: 'Widgets', component: Widgets },
+  //{ path: '/widgets', name: 'Widgets', component: Widgets },
   { path: '/charts', name: 'Charts', component: Charts },
   { path: '/users', exact: true,  name: 'Users', component: Users },
   { path: '/users/:id', exact: true, name: 'User Details', component: User },

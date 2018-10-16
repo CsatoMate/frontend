@@ -13,14 +13,14 @@ class Register extends Component {
                   <Form>
                     <h1>Register</h1>
                     <p className="text-muted">Create your account</p>
-                    <InputGroup className="mb-3">
+{/*                    <InputGroup className="mb-3">
                       <InputGroupAddon addonType="prepend">
                         <InputGroupText>
                           <i className="icon-user"></i>
                         </InputGroupText>
                       </InputGroupAddon>
                       <Input type="text" placeholder="Username" autoComplete="username" />
-                    </InputGroup>
+                    </InputGroup>*/}
                     <InputGroup className="mb-3">
                       <InputGroupAddon addonType="prepend">
                         <InputGroupText>@</InputGroupText>
@@ -46,7 +46,7 @@ class Register extends Component {
                     <Button color="success" block>Create Account</Button>
                   </Form>
                 </CardBody>
-                <CardFooter className="p-4">
+{/*                <CardFooter className="p-4">
                   <Row>
                     <Col xs="12" sm="6">
                       <Button className="btn-facebook" block><span>facebook</span></Button>
@@ -55,7 +55,7 @@ class Register extends Component {
                       <Button className="btn-twitter" block><span>twitter</span></Button>
                     </Col>
                   </Row>
-                </CardFooter>
+                </CardFooter>*/}
               </Card>
             </Col>
           </Row>
