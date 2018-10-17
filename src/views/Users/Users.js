@@ -30,7 +30,7 @@ class Users extends Component {
 
   render() {
 
-    const userList = usersData.filter((user) => user.id < 16)
+    const userList = usersData.filter((user) => user.id < 16);
 
     return (
       <div className="animated fadeIn">

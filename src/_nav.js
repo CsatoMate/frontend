@@ -148,12 +148,12 @@ export default {
     },*/
     {
       name: 'Statements',
-      url: '/charts',
+      url:  '/statements',      //'/charts',
       icon: 'fa fa-line-chart fa-lg mt-4', //'fa fa-thermometer fa-lg mt-4', //'icon-pie-chart',
     },
     {
       name: 'Devices',
-      url: '/icons',
+      url: '/devices',
       icon: 'fa fa-cogs fa-lg mt-4',
       /*children: [
         {
