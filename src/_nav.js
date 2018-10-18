@@ -186,7 +186,14 @@ export default {
         },
       ],*/
     },
+
     {
+      name: 'Devices Value Setting',
+      url: '/controller',
+      icon: 'fa fa-wrench fa-lg mt-4',
+    },
+
+/*    {
       name: 'Notifications',
       url: '/notifications',
       icon: 'icon-bell',
@@ -207,7 +214,7 @@ export default {
           icon: 'icon-bell',
         },
       ],
-    },
+    },*/
 /*    {
       name: 'Widgets',
       url: '/widgets',

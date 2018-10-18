@@ -28,10 +28,12 @@ import { Colors, Typography } from './Theme';
 import Widgets from './Widgets';
 import Devices from './Devices/Devices';
 import Statements from './Statements/Statements';
+import Controller from './Controller/Controller';
 
 export {
   Statements,
   Devices,
+  Controller,
   Badges,
   Typography,
   Colors,

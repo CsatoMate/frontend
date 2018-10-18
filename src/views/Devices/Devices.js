@@ -9,8 +9,8 @@ function UserRow(props) {
   //const deviceLink = `#/users/${device.id}`;
 
   const getBadge = (status) => {
-    return status === 'ON' ? 'success' :
-      status === 'OFF' ? 'secondary' : 'primary'
+    return status === 'ENABLED' ? 'success' :
+      status === 'DISABLED' ? 'secondary' : 'primary'
       /*
         status === 'Pending' ? 'warning' :
           status === 'Banned' ? 'danger' :
@@ -35,7 +35,7 @@ class Buttons extends Component {
 
       <div className="animated fadeIn">
         <Row>
-          <Col xl={6}>
+          <Col className="col-md-6 offset-md-3">
             <Card >
               <CardHeader>
                 {/*<small className="text-muted">example</small>*/}

@@ -83,7 +83,7 @@ class Charts extends Component {
     const deviceList = deviceData.filter((device) => device.id < 10);
     return (
       <div className="animated fadeIn">
-        <CardColumns className="cols-2">
+        <CardColumns className="cols-2" style={{"columnCount":"1"}}>
           <Card>
             <CardHeader>
               <i className="icon-speedometer"/>
@@ -113,7 +113,7 @@ class Charts extends Component {
 
 
         {/*<Col xl={6}>*/}
-          <Card >
+          {/*<Card >
             <CardHeader>
               <Row className="align-items-center">
                 <Col col="10" xl className="mb-3 mb-xl-0">
@@ -142,7 +142,7 @@ class Charts extends Component {
                 </tbody>
               </Table>
             </CardBody>
-          </Card>
+          </Card>*/}
         {/*</Col>*/}
         </CardColumns>
       </div>

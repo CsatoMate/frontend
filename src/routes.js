@@ -192,6 +192,11 @@ const Statements = Loadable({
   loading: Loading,
 });
 
+const Controller = Loadable({
+  loader: () => import('./views/Controller/Controller'),
+  loading: Loading,
+});
+
 
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
 const routes = [
@@ -199,6 +204,7 @@ const routes = [
   { path: '/devices', name: 'Devices', component: Devices },
   { path: '/statements', name: 'Statements', component: Statements },
   { path: '/dashboard', name: 'Dashboard', component: Dashboard },
+  { path: '/controller', name: 'Controller', component: Controller },
   { path: '/theme', exact: true, name: 'Theme', component: Colors },
   { path: '/theme/colors', name: 'Colors', component: Colors },
   { path: '/theme/typography', name: 'Typography', component: Typography },

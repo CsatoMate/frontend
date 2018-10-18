@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Bar, Line } from 'react-chartjs-2';
+import React, {Component} from 'react';
+import {Bar, Line} from 'react-chartjs-2';
 import {
   Badge,
   Button,
@@ -21,8 +21,9 @@ import {
   Table,
 } from 'reactstrap';
 import Widget03 from '../../views/Widgets/Widget03'
-import { CustomTooltips } from '@coreui/coreui-plugin-chartjs-custom-tooltips';
-import { getStyle, hexToRgba } from '@coreui/coreui/dist/js/coreui-utilities'
+import {CustomTooltips} from '@coreui/coreui-plugin-chartjs-custom-tooltips';
+import {getStyle, hexToRgba} from '@coreui/coreui/dist/js/coreui-utilities'
+import {AppSwitch} from "@coreui/react";
 
 const brandPrimary = getStyle('--primary');
 const brandSuccess = getStyle('--success');
@@ -227,10 +228,10 @@ const cardChartOpts4 = {
 
 // Social Box Chart
 const socialBoxData = [
-  { data: [65, 59, 84, 84, 51, 55, 40], label: 'facebook' },
-  { data: [1, 13, 9, 17, 34, 41, 38], label: 'twitter' },
-  { data: [78, 81, 80, 45, 34, 12, 40], label: 'linkedin' },
-  { data: [35, 23, 56, 22, 97, 23, 64], label: 'google' },
+  {data: [65, 59, 84, 84, 51, 55, 40], label: 'facebook'},
+  {data: [1, 13, 9, 17, 34, 41, 38], label: 'twitter'},
+  {data: [78, 81, 80, 45, 34, 12, 40], label: 'linkedin'},
+  {data: [35, 23, 56, 22, 97, 23, 64], label: 'google'},
 ];
 
 const makeSocialBoxData = (dataSetNo) => {
@@ -415,8 +416,8 @@ const mainChartOpts = {
     mode: 'index',
     position: 'nearest',
     callbacks: {
-      labelColor: function(tooltipItem, chart) {
-        return { backgroundColor: chart.data.datasets[tooltipItem.datasetIndex].borderColor }
+      labelColor: function (tooltipItem, chart) {
+        return {backgroundColor: chart.data.datasets[tooltipItem.datasetIndex].borderColor}
       }
     }
   },
@@ -480,32 +481,29 @@ class Dashboard extends Component {
 
     return (
       <div className="animated fadeIn">
-{/*        <Row>
-          <Col xs="12" sm="6" lg="3">
+        <Row>
+          <Col xs="12" sm="8" lg="2">
             <Card className="text-white bg-info">
-              <CardBody className="pb-0">
-                <ButtonGroup className="float-right">
-                  <ButtonDropdown id='card1' isOpen={this.state.card1} toggle={() => { this.setState({ card1: !this.state.card1 }); }}>
-                    <DropdownToggle caret className="p-0" color="transparent">
-                      <i className="icon-settings"></i>
-                    </DropdownToggle>
-                    <DropdownMenu right>
-                      <DropdownItem>Action</DropdownItem>
-                      <DropdownItem>Another action</DropdownItem>
-                      <DropdownItem disabled>Disabled action</DropdownItem>
-                      <DropdownItem>Something else here</DropdownItem>
-                    </DropdownMenu>
-                  </ButtonDropdown>
-                </ButtonGroup>
-                <div className="text-value">9.823</div>
-                <div>Members online</div>
+              <CardBody>
+                <div className="row justify-content-center">
+                  <div className="text-value ">Temperature Sensor</div>
+                </div>
+                <div className="row justify-content-around">
+                  <div className="col-6">
+                    <AppSwitch className={'mx-1 switch-lg'} variant={'pill'} color={'success'} outline={'alt'} label checked />
+                  </div>
+                  <div className="text-value col-6">37 °C</div>
+                </div>
               </CardBody>
-              <div className="chart-wrapper mx-3" style={{ height: '70px' }}>
-                <Line data={cardChartData2} options={cardChartOpts2} height={70} />
+              {/*<div className="col-lg-12 offset-lg-3 col-md-12 offset-md-3 col-sm-6 offset-sm-3">*/}
+              <div className="row justify-content-center">
+                2018-10-18 10:00
               </div>
             </Card>
           </Col>
+        </Row>
 
+        {/*
           <Col xs="12" sm="6" lg="3">
             <Card className="text-white bg-primary">
               <CardBody className="pb-0">
@@ -591,15 +589,18 @@ class Dashboard extends Component {
                     <Button color="primary" className="float-right"><i className="icon-cloud-download"></i></Button>
                     <ButtonToolbar className="float-right" aria-label="Toolbar with button groups">
                       <ButtonGroup className="mr-3" aria-label="First group">
-                        <Button color="outline-secondary" onClick={() => this.onRadioBtnClick(1)} active={this.state.radioSelected === 1}>Day</Button>
-                        <Button color="outline-secondary" onClick={() => this.onRadioBtnClick(2)} active={this.state.radioSelected === 2}>Month</Button>
-                        <Button color="outline-secondary" onClick={() => this.onRadioBtnClick(3)} active={this.state.radioSelected === 3}>Year</Button>
+                        <Button color="outline-secondary" onClick={() => this.onRadioBtnClick(1)}
+                                active={this.state.radioSelected === 1}>Day</Button>
+                        <Button color="outline-secondary" onClick={() => this.onRadioBtnClick(2)}
+                                active={this.state.radioSelected === 2}>Month</Button>
+                        <Button color="outline-secondary" onClick={() => this.onRadioBtnClick(3)}
+                                active={this.state.radioSelected === 3}>Year</Button>
                       </ButtonGroup>
                     </ButtonToolbar>
                   </Col>
                 </Row>
-                <div className="chart-wrapper" style={{ height: 300 + 'px', marginTop: 40 + 'px' }}>
-                  <Line data={mainChart} options={mainChartOpts} height={300} />
+                <div className="chart-wrapper" style={{height: 300 + 'px', marginTop: 40 + 'px'}}>
+                  <Line data={mainChart} options={mainChartOpts} height={300}/>
                 </div>
               </CardBody>
               <CardFooter>
@@ -607,27 +608,27 @@ class Dashboard extends Component {
                   <Col sm={12} md className="mb-sm-2 mb-0">
                     <div className="text-muted">Visits</div>
                     <strong>29.703 Users (40%)</strong>
-                    <Progress className="progress-xs mt-2" color="success" value="40" />
+                    <Progress className="progress-xs mt-2" color="success" value="40"/>
                   </Col>
                   <Col sm={12} md className="mb-sm-2 mb-0 d-md-down-none">
                     <div className="text-muted">Unique</div>
                     <strong>24.093 Users (20%)</strong>
-                    <Progress className="progress-xs mt-2" color="info" value="20" />
+                    <Progress className="progress-xs mt-2" color="info" value="20"/>
                   </Col>
                   <Col sm={12} md className="mb-sm-2 mb-0">
                     <div className="text-muted">Pageviews</div>
                     <strong>78.706 Views (60%)</strong>
-                    <Progress className="progress-xs mt-2" color="warning" value="60" />
+                    <Progress className="progress-xs mt-2" color="warning" value="60"/>
                   </Col>
                   <Col sm={12} md className="mb-sm-2 mb-0">
                     <div className="text-muted">New Users</div>
                     <strong>22.123 Users (80%)</strong>
-                    <Progress className="progress-xs mt-2" color="danger" value="80" />
+                    <Progress className="progress-xs mt-2" color="danger" value="80"/>
                   </Col>
                   <Col sm={12} md className="mb-sm-2 mb-0 d-md-down-none">
                     <div className="text-muted">Bounce Rate</div>
                     <strong>Average Rate (40.15%)</strong>
-                    <Progress className="progress-xs mt-2" color="primary" value="40" />
+                    <Progress className="progress-xs mt-2" color="primary" value="40"/>
                   </Col>
                 </Row>
               </CardFooter>
@@ -635,7 +636,7 @@ class Dashboard extends Component {
           </Col>
         </Row>
 
-       {/* <Row>
+        {/* <Row>
           <Col xs="6" sm="6" lg="3">
             <Widget03 dataBox={() => ({ variant: 'facebook', friends: '89k', feeds: '459' })} >
               <div className="chart-wrapper">
@@ -708,7 +709,7 @@ class Dashboard extends Component {
           </Col>
         </Row>*/}
 
-       {/* <Row>
+        {/* <Row>
           <Col>
             <Card>
               <CardHeader>
