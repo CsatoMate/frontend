@@ -3,25 +3,24 @@ import { Line } from 'react-chartjs-2';
 import { Card, CardBody, CardColumns, CardHeader, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem, Badge, Col, Row, Button, Table} from 'reactstrap';
 import { CustomTooltips } from '@coreui/coreui-plugin-chartjs-custom-tooltips';
 
-import deviceData from "../Devices/DeviceData";
+import deviceList from "./DeviceList";
 
 
-function UserRow(props) {
+function DropItems(props) {
   const device = props.device;
 
-  const getBadge = (status) => {
-    return status === 'ON' ? 'success' :
-      status === 'OFF' ? 'secondary' : 'primary'
-  };
-
   return (
-    <tr key={device.id.toString()}>
-      <th scope="row">{device.id}</th>
-      <td>{device.name}</td>
-      <td>{device.type}</td>
-      <td>{device.UserID}</td>
-      <td><Badge color={getBadge(device.auth)}>{device.auth}</Badge></td>
-    </tr>
+    <DropdownItem>{device.name}</DropdownItem>
+
+
+/*    <DropdownMenu right>
+        {/!*{deviceList.map((device, index) =>
+                      <DropItems key={index} device={device}/>
+                    )}*!/}
+        {/!*                    <DropdownItem disabled>Device 1.</DropdownItem>
+                    <DropdownItem>Device 2.</DropdownItem>
+                    <DropdownItem>Device 3.</DropdownItem>*!/}
+    </DropdownMenu>*/
   )
 }
 const line = {
@@ -80,7 +79,7 @@ class Charts extends Component {
   }
 
   render() {
-    const deviceList = deviceData.filter((device) => device.id < 10);
+    const deviceList = deviceList;
     return (
       <div className="animated fadeIn">
         <CardColumns className="cols-2" style={{"columnCount":"1"}}>
@@ -95,10 +94,14 @@ class Charts extends Component {
                     Devices Dropdown
                   </DropdownToggle>
                   <DropdownMenu right>
-                    <DropdownItem header>Header</DropdownItem>
-                    <DropdownItem disabled>Device 1.</DropdownItem>
+
+{/*                    <DropItems list={deviceList}>
+                    {deviceList.map((device, index) =>
+                      <DropItems key={index} device={device}/>
+                    )}*/}
+{/*                    <DropdownItem disabled>Device 1.</DropdownItem>
                     <DropdownItem>Device 2.</DropdownItem>
-                    <DropdownItem>Device 3.</DropdownItem>
+                    <DropdownItem>Device 3.</DropdownItem>*/}
                   </DropdownMenu>
                 </ButtonDropdown>
               </div>

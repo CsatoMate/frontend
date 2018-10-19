@@ -3,7 +3,7 @@
   "name": "MQTT",
   "icons": [
     {
-      "src": "./assets/img/favicon.png",
+      "src": "./assets/img/codenode.png",
       "sizes": "100x100",
       "type": "image/png"
     }
