@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { Badge, DropdownItem, DropdownMenu, DropdownToggle, Nav, NavItem, NavLink } from 'reactstrap';
+import { /*Badge,*/ DropdownItem, DropdownMenu, DropdownToggle, Nav, NavItem, NavLink } from 'reactstrap';
 import PropTypes from 'prop-types';
 
-import { AppAsideToggler, AppHeaderDropdown, AppNavbarBrand, AppSidebarToggler } from '@coreui/react';
-import logo from '../../assets/img/brand/logo.svg'
-import sygnet from '../../assets/img/brand/sygnet.svg'
-import codenode from '../../assets/img/brand/codenode.png';
+import { /*AppAsideToggler*/ AppHeaderDropdown, AppNavbarBrand, AppSidebarToggler } from '@coreui/react';
+//import logo from '../../assets/img/brand/logo.svg'
+//import sygnet from '../../assets/img/brand/sygnet.svg'
+import IOT from '../../assets/img/brand/IOT.png';
 
 const propTypes = {
   children: PropTypes.node,
@@ -23,8 +23,8 @@ class DefaultHeader extends Component {
       <React.Fragment>
         <AppSidebarToggler className="d-lg-none" display="md" mobile />
         <AppNavbarBrand
-          full={{ src: codenode, width: 89, height: 25, alt: 'CodeNode Logo', }}
-          minimized={{ src: codenode, width: 30, height: 30, alt: 'CodeNode Logo' }} style={{'backgroundColor': 'gray'}}
+          full={{ src: IOT, width: 80, height: 40, alt: 'IOT Logo', }}
+          minimized={{ src: IOT, width: 40, height: 20, alt: 'IOT Logo' }}
         />
         <AppSidebarToggler className="d-md-down-none" display="lg" />
 

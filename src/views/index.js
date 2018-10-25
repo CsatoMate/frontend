@@ -27,8 +27,8 @@ import { Login, Page404, Page500, Register } from './Pages';
 import { Colors, Typography } from './Theme';
 import Widgets from './Widgets';
 import Devices from './Devices/Devices';
-import Statements from './Statements/Statements';
-import Controller from './Controller/Controller';
+import {Statements} from './Statements/Statements';
+import {Controller} from './Controller/Controller';
 
 export {
   Statements,
@@ -44,9 +44,9 @@ export {
   Login,
   Modals,
   Alerts,
-  Flags,
+/*  Flags,
   SimpleLineIcons,
-  FontAwesome,
+  FontAwesome,*/
   ButtonDropdowns,
   ButtonGroups,
   BrandButtons,
@@ -54,9 +54,9 @@ export {
   Tooltips,
   Tabs,
   Tables,
-  Charts,
+/*  Charts,
   Dashboard,
-  Widgets,
+  Widgets,*/
   Jumbotrons,
   Switches,
   ProgressBar,

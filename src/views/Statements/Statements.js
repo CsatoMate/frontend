@@ -1,39 +1,95 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import Highcharts from 'highcharts/highstock';
 import {
   HighchartsStockChart, Chart, withHighcharts, XAxis, YAxis, Title, Legend,
-  AreaSplineSeries, SplineSeries, Navigator, RangeSelector, Tooltip
+  AreaSplineSeries, RangeSelector, Tooltip
 } from 'react-jsx-highstock';
 import deviceData from "./DeviceData";
 
 
-function makeData() {
+import {
+  ButtonDropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
+} from 'reactstrap';
+
+import deviceList from "./DeviceList";
+
+function makeData(deviceName) {
   const data = [];
-  const log = deviceData;
-  log.map(item =>{
-    data.push( [new Date(item.update).getTime(), item.value]);
-  });
-  return data;
+  let log = deviceData;
+
+  if (deviceName !== "") {
+    log = deviceData.filter((item) => item.name === deviceName);
+    log.map(item => {
+      data.push([new Date(item.update).getTime(), item.value]);
+    });
+    return data;
+  }
+
+  return null;
 }
 
 class Charts extends Component {
 
-  constructor (props) {
+  constructor(props) {
     super(props);
     this.state = {
-      data2: makeData()
+      data2: makeData(""),
+      dropdownOpen: false,
+      active_dropdown: "Devices dropdown",
+      unitType: "",
+      measureName: " ",
     };
+    this.deviceList = deviceList;
+    this.toggle = this.toggle.bind(this);
+  }
+
+  toggle() {
+    this.setState(prevState => ({
+      dropdownOpen: !prevState.dropdownOpen
+    }));
+  }
+
+  handleChange(e) {
+    console.log("Target: ", e.target);
+    let selected = this.getUnitType(e.target.value);
+
+    this.setState({
+      active_dropdown: e.target.name,
+      data2: makeData(e.target.name),
+      unitType: selected.unitType,
+      measureName: selected.measureName,
+    })
+  }
+
+  getUnitType(id) {
+      let item = this.deviceList.filter((devID) => devID.id.toString() === id);
+      console.log(id, item);
+      return item[0];
   }
 
   render() {
-    const { data2 } = this.state;
-
     return (
-      <div >
+      <div>
+        <div className="card-header-actions">
+          <ButtonDropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
+            <DropdownToggle caret onChange={this.handleChange.bind(this)}>
+              Select Device
+            </DropdownToggle>
+            <DropdownMenu right>
+              {this.deviceList.map((device) =>
+                <DropdownItem onClick={this.handleChange.bind(this)} key={device.id}
+                              value={device.id} name={device.name}>{device.name}</DropdownItem>
+              )}
+            </DropdownMenu>
+          </ButtonDropdown>
+        </div>
         <HighchartsStockChart>
           <Chart zoomType="x"/>
 
-          <Title>Temperature Chart</Title>
+          <Title>Statements Chart</Title>
 
           <Legend>
             <Legend.Title>Legend</Legend.Title>
@@ -44,30 +100,19 @@ class Charts extends Component {
             <RangeSelector.Button count={7} type="day">Week</RangeSelector.Button>
             <RangeSelector.Button count={1} type="month">Month</RangeSelector.Button>
             <RangeSelector.Button type="all">All</RangeSelector.Button>
-            <RangeSelector.Input boxBorderColor="#7cb5ec" />
+            <RangeSelector.Input boxBorderColor="#7cb5ec"/>
           </RangeSelector>
 
-          <Tooltip />
+          <Tooltip/>
 
           <XAxis>
             <XAxis.Title>Time</XAxis.Title>
           </XAxis>
 
-{/*          <YAxis>
-            <YAxis.Title>Price</YAxis.Title>
-            <AreaSplineSeries id="profit" name="Profit" data={data1} />
-            <SplineSeries id="temp" name="Temperature" data={data2} />
-          </YAxis>*/}
-
           <YAxis>
-            <YAxis.Title rotation={0}>°C</YAxis.Title>
-            <AreaSplineSeries id="temp" name="Temperature" data={data2} />
+            <YAxis.Title rotation={0}>{this.state.unitType}</YAxis.Title>
+            <AreaSplineSeries id="measure" name={this.state.measureName} data={this.state.data2}/>
           </YAxis>
-
-          <Navigator>
-            {/*<Navigator.Series seriesId="profit" />*/}
-            <Navigator.Series seriesId="temp" />
-          </Navigator>
         </HighchartsStockChart>
 
       </div>
@@ -76,10 +121,6 @@ class Charts extends Component {
 }
 
 export default withHighcharts(Charts, Highcharts);
-
-
-
-
 
 
 /*

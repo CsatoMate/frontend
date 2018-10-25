@@ -1,23 +1,23 @@
 import React, {Component} from 'react';
 import {
-  Badge,
+  Card,
+  CardBody,
+  Col,
+  Row,
+/*  Badge,
   Button,
   ButtonDropdown,
   ButtonGroup,
   ButtonToolbar,
-  Card,
-  CardBody,
   CardFooter,
   CardHeader,
   CardTitle,
-  Col,
   Dropdown,
   DropdownItem,
   DropdownMenu,
   DropdownToggle,
   Progress,
-  Row,
-  Table,
+  Table,*/
 } from 'reactstrap';
 import {AppSwitch} from "@coreui/react";
 import DashboardData from "./DashboardData";

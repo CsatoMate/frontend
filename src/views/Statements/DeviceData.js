@@ -7,11 +7,11 @@ const DeviceData = [
   {id: 5, name: 'valami', value: 7, unitType:"°C",  update: "2018-10-14 17:52"},
   {id: 6, name: 'valami', value: 22, unitType:"°C", update: "2018-10-14 23:42"},
   {id: 7, name: 'valami', value: 15, unitType:"°C", update: "2018-10-15 21:22"},
-  {id: 8, name: 'valami', value: 23, unitType:"A", update: "2018-10-16 18:22"},
-  {id: 9, name: 'Kazán3', value: 2, unitType:"A", update: "2018-10-17 13:22"},
-  {id: 10, name: 'Kazán4', value: 30, unitType:"A", update: "2018-10-18 12:22"},
-  {id: 11, name: 'Kazán5', value: 2, unitType:"Ohm", update: "2018-10-18 14:22"},
-  {id: 12, name: 'Kazán6', value: 10, unitType:"A", update: "2018-10-19 01:52"},
+  {id: 8, name: 'valami', value: 23, unitType:"°C", update: "2018-10-16 18:22"},
+  {id: 9, name: 'Kazán3', value: 2, unitType:"°C", update: "2018-10-17 13:22"},
+  {id: 10, name: 'Kazán4', value: 30, unitType:"°C", update: "2018-10-18 12:22"},
+  {id: 11, name: 'Kazán4', value: 2, unitType:"°C", update: "2018-10-18 14:22"},
+  {id: 12, name: 'Kazán6', value: 10, unitType:"°C", update: "2018-10-19 01:52"},
 ];
 
 export default DeviceData

@@ -1,5 +1,24 @@
 import React, {Component} from 'react';
-import {Button, Card, CardBody, CardHeader, Col, Row, Badge, Table} from 'reactstrap';
+import {
+  Button,
+  Card,
+  CardBody,
+  CardHeader,
+  Col,
+  Row,
+  Badge,
+  Table,
+  Modal,
+  ModalBody,
+  ModalFooter,
+  ModalHeader,
+  FormGroup,
+  Form,
+  InputGroup,
+  Input,
+  InputGroupAddon,
+  InputGroupText
+} from 'reactstrap';
 
 import deviceData from "./DeviceData";
 
@@ -11,10 +30,10 @@ function UserRow(props) {
   const getBadge = (status) => {
     return status === 'ENABLED' ? 'success' :
       status === 'DISABLED' ? 'secondary' : 'primary'
-      /*
-        status === 'Pending' ? 'warning' :
-          status === 'Banned' ? 'danger' :
-            'primary'*/
+    /*
+      status === 'Pending' ? 'warning' :
+        status === 'Banned' ? 'danger' :
+          'primary'*/
   };
 
   return (
@@ -29,6 +48,26 @@ function UserRow(props) {
 }
 
 class Buttons extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      modal: false,
+    };
+    this.toggle = this.toggle.bind(this);
+  }
+
+  toggle() {
+    this.setState({
+      modal: !this.state.modal,
+    });
+  }
+
+
+  addDevice() {
+
+  }
+
   render() {
     const deviceList = deviceData.filter((device) => device.id < 10);
     return (
@@ -36,7 +75,7 @@ class Buttons extends Component {
       <div className="animated fadeIn">
         <Row>
           <Col className="col-md-6 offset-md-3">
-            <Card >
+            <Card>
               <CardHeader>
                 {/*<small className="text-muted">example</small>*/}
                 <Row className="align-items-center">
@@ -44,11 +83,70 @@ class Buttons extends Component {
                     <i className="fa fa-align-justify"/> DEVICES
                   </Col>
                   <Col col="10" sm="3" md="3" className="mb-3 mb-xl-0">
-                    <Button block outline color="primary">Add device</Button>
+                    <Button block outline color="primary" onClick={this.toggle}>Add device</Button>
                   </Col>
                 </Row>
               </CardHeader>
-              <CardBody >
+
+              <CardBody>
+                <Form action="" method="post">
+                  <Modal isOpen={this.state.modal} toggle={this.toggle} className={'modal-primary ' + this.props.className}>
+                    <ModalHeader toggle={this.toggle} >Add new device</ModalHeader>
+                    <ModalBody>
+                      <FormGroup>
+                        <InputGroup>
+                          <Input type="text" id="deviceName" name="deviceName" placeholder="Device name"
+                                 autoComplete="name"/>
+                          <InputGroupAddon addonType="append">
+                            <InputGroupText><i className="fa fa-microchip"/></InputGroupText>
+                          </InputGroupAddon>
+                        </InputGroup>
+                      </FormGroup>
+                      <FormGroup>
+                        <InputGroup>
+                          <Input type="text" id="typeName" name="typeName" placeholder="Device type"
+                                 autoComplete="name"/>
+                          <InputGroupAddon addonType="append">
+                            <InputGroupText><i className="cui-globe icons"/></InputGroupText>
+                          </InputGroupAddon>
+                        </InputGroup>
+                      </FormGroup>
+                      <FormGroup>
+                        <InputGroup>
+                          <Input type="text" id="userID" name="userID" placeholder="User ID"
+                                 autoComplete="name"/>
+                          <InputGroupAddon addonType="append">
+                            <InputGroupText><i className="fa fa-user"/></InputGroupText>
+                          </InputGroupAddon>
+                        </InputGroup>
+                      </FormGroup>
+
+
+                      <FormGroup>
+                        <InputGroup>
+                          <Input type="boolean" id="email2" name="email2" placeholder="Email" autoComplete="username"/>
+                          <InputGroupAddon addonType="append">
+                            <InputGroupText><i className="fa fa-envelope"/></InputGroupText>
+                          </InputGroupAddon>
+                        </InputGroup>
+                      </FormGroup>
+                      <FormGroup>
+                        <InputGroup>
+                          <Input type="password" id="password2" name="password2" placeholder="Password"
+                                 autoComplete="current-password"/>
+                          <InputGroupAddon addonType="append">
+                            <InputGroupText><i className="fa fa-asterisk"/></InputGroupText>
+                          </InputGroupAddon>
+                        </InputGroup>
+                      </FormGroup>
+
+                    </ModalBody>
+                    <ModalFooter>
+                      <Button color="primary" onClick={this.toggle}>Save</Button>{' '}
+                      <Button color="secondary" onClick={this.toggle}>Cancel</Button>
+                    </ModalFooter>
+                  </Modal>
+                </Form>
                 <Table responsive hover>
                   <thead>
                   <tr>

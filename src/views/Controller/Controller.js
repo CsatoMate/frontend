@@ -29,7 +29,7 @@ function UserRow(props) {
   )
 }
 
-class Buttons extends Component {
+class Controller extends Component {
 
   constructor(props) {
     super(props);
@@ -115,4 +115,4 @@ class Buttons extends Component {
   }
 }
 
-export default Buttons;
+export default Controller;
