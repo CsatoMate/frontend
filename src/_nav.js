@@ -5,6 +5,56 @@ export default {
       url: '/dashboard',
       icon: 'icon-home',
     },
+    {
+      name: 'Statements',
+      url:  '/statements',      //'/charts',
+      icon: 'fa fa-line-chart', //'fa fa-thermometer fa-lg mt-4', //'icon-pie-chart',
+    },
+    {
+      name: 'Devices',
+      url: '/devices',
+      icon: 'fa fa-cogs',
+    },
+    {
+      name: 'Devices Value Setting',
+      url: '/controller',
+      icon: 'fa fa-wrench',
+    },
+
+    {
+      divider: true,
+    },
+    {
+      title: true,
+      name: 'Extras',
+    },
+    {
+      name: 'Pages',
+      url: '/pages',
+      icon: 'icon-star',
+      children: [
+        {
+          name: 'Login',
+          url: '/login',
+          icon: 'icon-star',
+        },
+        {
+          name: 'Register',
+          url: '/register',
+          icon: 'icon-star',
+        },
+        {
+          name: 'Error 404',
+          url: '/404',
+          icon: 'icon-star',
+        },
+        {
+          name: 'Error 500',
+          url: '/500',
+          icon: 'icon-star',
+        },
+      ],
+    },
 /*    {
       title: true,
       name: 'Theme',
@@ -146,52 +196,44 @@ export default {
         },
       ],
     },*/
-    {
-      name: 'Statements',
-      url:  '/statements',      //'/charts',
-      icon: 'fa fa-line-chart fa-lg mt-4', //'fa fa-thermometer fa-lg mt-4', //'icon-pie-chart',
-    },
-    {
-      name: 'Devices',
-      url: '/devices',
-      icon: 'fa fa-cogs fa-lg mt-4',
-      /*children: [
+    /*
         {
-          name: 'CoreUI Icons',
-          url: '/icons/coreui-icons',
-          icon: 'icon-star',
-          badge: {
-            variant: 'info',
-            text: 'NEW',
-          },
-        },
-        {
-          name: 'Flags',
-          url: '/icons/flags',
-          icon: 'icon-star',
-        },
-        {
-          name: 'Font Awesome',
-          url: '/icons/font-awesome',
-          icon: 'icon-star',
-          badge: {
-            variant: 'secondary',
-            text: '4.7',
-          },
-        },
-        {
-          name: 'Simple Line Icons',
-          url: '/icons/simple-line-icons',
-          icon: 'icon-star',
-        },
-      ],*/
-    },
+          name: 'Devices',
+          url: '/devices',
+          icon: 'fa fa-cogs fa-lg mt-4',
+          children: [
+            {
+              name: 'CoreUI Icons',
+              url: '/icons/coreui-icons',
+              icon: 'icon-star',
+              badge: {
+                variant: 'info',
+                text: 'NEW',
+              },
+            },
+            {
+              name: 'Flags',
+              url: '/icons/flags',
+              icon: 'icon-star',
+            },
+            {
+              name: 'Font Awesome',
+              url: '/icons/font-awesome',
+              icon: 'icon-star',
+              badge: {
+                variant: 'secondary',
+                text: '4.7',
+              },
+            },
+            {
+              name: 'Simple Line Icons',
+              url: '/icons/simple-line-icons',
+              icon: 'icon-star',
+            },
+          ],
+        },*/
 
-    {
-      name: 'Devices Value Setting',
-      url: '/controller',
-      icon: 'fa fa-wrench fa-lg mt-4',
-    },
+
 
 /*    {
       name: 'Notifications',
@@ -224,39 +266,6 @@ export default {
         text: 'NEW',
       },
     },*/
-    {
-      divider: true,
-    },
-    {
-      title: true,
-      name: 'Extras',
-    },
-    {
-      name: 'Pages',
-      url: '/pages',
-      icon: 'icon-star',
-      children: [
-        {
-          name: 'Login',
-          url: '/login',
-          icon: 'icon-star',
-        },
-        {
-          name: 'Register',
-          url: '/register',
-          icon: 'icon-star',
-        },
-        {
-          name: 'Error 404',
-          url: '/404',
-          icon: 'icon-star',
-        },
-        {
-          name: 'Error 500',
-          url: '/500',
-          icon: 'icon-star',
-        },
-      ],
-    },
+
   ],
 };

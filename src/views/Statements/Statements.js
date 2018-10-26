@@ -193,7 +193,7 @@ class Charts extends Component {
     }));
   }
 
-  handleChange(e) {
+  setHandleType(e) {
     console.log(e.target);
     this.setState({
         active_dropdown: e.target.name,
@@ -238,12 +238,12 @@ class Charts extends Component {
               Temperature Line Chart
               <div className="card-header-actions">
                 <ButtonDropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
-                  <DropdownToggle caret onChange={this.handleChange.bind(this)}>
+                  <DropdownToggle caret onChange={this.setHandleType.bind(this)}>
                     {this.state.active_dropdown}
                   </DropdownToggle>
                   <DropdownMenu right>
                     {this.deviceList.map((device) =>
-                      <DropdownItem onClick={this.handleChange.bind(this)} key={device.id}
+                      <DropdownItem onClick={this.setHandleType.bind(this)} key={device.id}
                                     value={device.id} name={device.name}>{device.name}</DropdownItem>
                     )}
                   </DropdownMenu>

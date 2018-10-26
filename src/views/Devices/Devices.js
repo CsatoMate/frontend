@@ -17,23 +17,28 @@ import {
   InputGroup,
   Input,
   InputGroupAddon,
-  InputGroupText
+  InputGroupText,
+  ButtonDropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
 } from 'reactstrap';
 
 import deviceData from "./DeviceData";
+import {AppSwitch} from "@coreui/react";
 
 
-function UserRow(props) {
+/*function UserRow(props) {
   const device = props.device;
   //const deviceLink = `#/users/${device.id}`;
 
   const getBadge = (status) => {
     return status === 'ENABLED' ? 'success' :
       status === 'DISABLED' ? 'secondary' : 'primary'
-    /*
+    /!*
       status === 'Pending' ? 'warning' :
         status === 'Banned' ? 'danger' :
-          'primary'*/
+          'primary'*!/
   };
 
   return (
@@ -41,11 +46,12 @@ function UserRow(props) {
       <th scope="row">{device.id}</th>
       <td>{device.name}</td>
       <td>{device.type}</td>
-      <td>{device.UserID}</td>
+      {/!*<td>{device.UserID}</td>*!/}
       <td><Badge color={getBadge(device.auth)}>{device.auth}</Badge></td>
+      <td><Button outline color="primary" onClick={props.toggle}>Add device</Button></td>
     </tr>
   )
-}
+}*/
 
 class Buttons extends Component {
 
@@ -53,8 +59,16 @@ class Buttons extends Component {
     super(props);
     this.state = {
       modal: false,
+      devName: '',
+      typeName: '',
+      authStatus: false,
+      dropdownOpen: false,
     };
     this.toggle = this.toggle.bind(this);
+    this.toggleDrop = this.toggleDrop.bind(this);
+    this.setHandleType = this.setHandleType.bind(this);
+    this.setHandleName = this.setHandleName.bind(this);
+    this.setHandleAuth = this.setHandleAuth.bind(this);
   }
 
   toggle() {
@@ -63,9 +77,68 @@ class Buttons extends Component {
     });
   }
 
+  toggleDrop() {
+    this.setState(prevState => ({
+      dropdownOpen: !prevState.dropdownOpen
+    }));
+  }
 
-  addDevice() {
+  setHandleType(event) {
+    this.setState({
+      typeName: event.target.value
+    });
+  }
 
+  setHandleName(event){
+    this.setState({
+      devName: event.target.value
+    })
+  }
+
+  setHandleAuth(event){
+    this.setState({
+      authStatus: event.target.checked
+    })
+  }
+
+  loadModalData(dev) {
+    console.log("EZZZ:", dev);
+
+    this.setState({
+      modal: !this.state.modal,
+      devName: dev.name,
+      authStatus: dev.auth === 'ENABLED',
+      typeName: dev.type,
+    });
+  }
+
+  userRow(data) {
+    const device = data;
+    //const deviceLink = `#/users/${device.id}`;
+
+    const getBadge = (status) => {
+      return status === 'ENABLED' ? 'success' :
+        status === 'DISABLED' ? 'secondary' : 'primary'
+      /*
+        status === 'Pending' ? 'warning' :
+          status === 'Banned' ? 'danger' :
+            'primary'*/
+    };
+
+    return (
+      <tr key={device.id.toString()}>
+        <th scope="row">{device.id}</th>
+        <td>{device.name}</td>
+        <td>{device.type}</td>
+        <td><Badge color={getBadge(device.auth)}>{device.auth}</Badge></td>
+        <td><Button outline color="primary" onClick={this.loadModalData.bind(this, device)}>Modify</Button></td>
+      </tr>
+    )
+  }
+
+
+  modifiyDevice(state) {
+    console.log("módosítás", state);
   }
 
   render() {
@@ -77,7 +150,6 @@ class Buttons extends Component {
           <Col className="col-md-6 offset-md-3">
             <Card>
               <CardHeader>
-                {/*<small className="text-muted">example</small>*/}
                 <Row className="align-items-center">
                   <Col col="10" xl className="mb-3 mb-xl-0">
                     <i className="fa fa-align-justify"/> DEVICES
@@ -87,16 +159,19 @@ class Buttons extends Component {
                   </Col>
                 </Row>
               </CardHeader>
-
               <CardBody>
                 <Form action="" method="post">
-                  <Modal isOpen={this.state.modal} toggle={this.toggle} className={'modal-primary ' + this.props.className}>
-                    <ModalHeader toggle={this.toggle} >Add new device</ModalHeader>
+                  <Modal isOpen={this.state.modal} toggle={this.toggle}
+                         className={'modal-primary ' + this.props.className}>
+                    <ModalHeader toggle={this.toggle}>Add new device</ModalHeader>
                     <ModalBody>
                       <FormGroup>
                         <InputGroup>
+                          <InputGroupAddon addonType="prepend">
+                            <InputGroupText>Device name:</InputGroupText>
+                          </InputGroupAddon>
                           <Input type="text" id="deviceName" name="deviceName" placeholder="Device name"
-                                 autoComplete="name"/>
+                                 autoComplete="name" defaultValue={this.state.devName} onChange={this.setHandleName}/>
                           <InputGroupAddon addonType="append">
                             <InputGroupText><i className="fa fa-microchip"/></InputGroupText>
                           </InputGroupAddon>
@@ -104,62 +179,64 @@ class Buttons extends Component {
                       </FormGroup>
                       <FormGroup>
                         <InputGroup>
-                          <Input type="text" id="typeName" name="typeName" placeholder="Device type"
-                                 autoComplete="name"/>
+                          <InputGroupAddon addonType="prepend">
+                            <InputGroupText>Device type:</InputGroupText>
+                          </InputGroupAddon>
+                          <select className="form-control" name="typeName" id="typeName" value={this.state.typeName}
+                                  onChange={this.setHandleType}>
+                            <option value="TH16">TH16</option>
+                            <option value="POW">POW</option>
+                          </select>
                           <InputGroupAddon addonType="append">
                             <InputGroupText><i className="cui-globe icons"/></InputGroupText>
                           </InputGroupAddon>
                         </InputGroup>
                       </FormGroup>
-                      <FormGroup>
-                        <InputGroup>
-                          <Input type="text" id="userID" name="userID" placeholder="User ID"
-                                 autoComplete="name"/>
-                          <InputGroupAddon addonType="append">
-                            <InputGroupText><i className="fa fa-user"/></InputGroupText>
-                          </InputGroupAddon>
-                        </InputGroup>
-                      </FormGroup>
+                      <FormGroup row>
+                        <Col md="4">
+                          <InputGroup>
+                            <InputGroupText>Authentication:</InputGroupText>
 
-
-                      <FormGroup>
-                        <InputGroup>
-                          <Input type="boolean" id="email2" name="email2" placeholder="Email" autoComplete="username"/>
-                          <InputGroupAddon addonType="append">
-                            <InputGroupText><i className="fa fa-envelope"/></InputGroupText>
+                          </InputGroup>
+                        </Col>
+                        <Col>
+                          <AppSwitch className={'mx-1 switch-lg'} variant={'pill'} color={'success'} outline={'alt'}
+                                     label
+                                     defaultChecked={this.state.authStatus} onChange={this.setHandleAuth}/>
+                        </Col>
+                        {/*                        <InputGroup>
+                          <InputGroupAddon addonType="prepend">
+                            <InputGroupText>Authentication:</InputGroupText>
                           </InputGroupAddon>
-                        </InputGroup>
-                      </FormGroup>
-                      <FormGroup>
-                        <InputGroup>
-                          <Input type="password" id="password2" name="password2" placeholder="Password"
-                                 autoComplete="current-password"/>
                           <InputGroupAddon addonType="append">
-                            <InputGroupText><i className="fa fa-asterisk"/></InputGroupText>
+                            <AppSwitch className={'mx-1 switch-lg'} variant={'pill'} color={'success'} outline={'alt'}
+                                       label
+                                       defaultChecked={this.state.chkbox}/>
                           </InputGroupAddon>
-                        </InputGroup>
+                        </InputGroup>*/}
                       </FormGroup>
-
                     </ModalBody>
                     <ModalFooter>
-                      <Button color="primary" onClick={this.toggle}>Save</Button>{' '}
+                      <Button type="submit" color="primary" onClick={this.modifiyDevice.bind(this, this.state)}>Save</Button>{' '}
                       <Button color="secondary" onClick={this.toggle}>Cancel</Button>
                     </ModalFooter>
                   </Modal>
                 </Form>
+
+
                 <Table responsive hover>
                   <thead>
                   <tr>
                     <th scope="col">id</th>
                     <th scope="col">Name</th>
                     <th scope="col">Type</th>
-                    <th scope="col">UserID</th>
                     <th scope="col">Auth</th>
+                    <th scope="col">Modify</th>
                   </tr>
                   </thead>
                   <tbody>
-                  {deviceList.map((device, index) =>
-                    <UserRow key={index} device={device}/>
+                  {deviceList.map((device) =>
+                    this.userRow(device)
                   )}
                   </tbody>
                 </Table>
@@ -167,122 +244,6 @@ class Buttons extends Component {
             </Card>
           </Col>
         </Row>
-
-        <Card>
-          <CardHeader>
-            <strong>Outline Buttons</strong>
-          </CardHeader>
-          <CardBody>
-            <Row className="align-items-center">
-              <Col col="12" xl className="mb-3 mb-xl-0">
-                Normal
-              </Col>
-              <Col col="6" sm="4" md="2" xl className="mb-3 mb-xl-0">
-                <Button block outline color="primary">Primary</Button>
-              </Col>
-              <Col col="6" sm="4" md="2" xl className="mb-3 mb-xl-0">
-                <Button block outline color="secondary">Secondary</Button>
-              </Col>
-              <Col col="6" sm="4" md="2" xl className="mb-3 mb-xl-0">
-                <Button block outline color="success">Success</Button>
-              </Col>
-              <Col col="6" sm="4" md="2" xl className="mb-3 mb-xl-0">
-                <Button block outline color="warning">Warning</Button>
-              </Col>
-              <Col col="6" sm="4" md="2" xl className="mb-3 mb-xl-0">
-                <Button block outline color="danger">Danger</Button>
-              </Col>
-              <Col col="6" sm="4" md="2" xl className="mb-3 mb-xl-0">
-                <Button block outline color="info">Info</Button>
-              </Col>
-              <Col col="6" sm="4" md="2" xl className="mb-3 mb-xl-0">
-                <Button block outline color="light">Light</Button>
-              </Col>
-              <Col col="6" sm="4" md="2" xl className="mb-3 mb-xl-0">
-                <Button block outline color="dark">Dark</Button>
-              </Col>
-            </Row>
-            <Row className="align-items-center mt-3">
-              <Col col="12" xl className="mb-3 mb-xl-0">
-                Active State
-              </Col>
-              <Col col="6" sm="4" md="2" xl className="mb-3 mb-xl-0">
-                <Button block outline active color="primary" aria-pressed="true">Primary</Button>
-              </Col>
-              <Col col="6" sm="4" md="2" xl className="mb-3 mb-xl-0">
-                <Button block outline active color="secondary" aria-pressed="true">Secondary</Button>
-              </Col>
-              <Col col="6" sm="4" md="2" xl className="mb-3 mb-xl-0">
-                <Button block outline active color="success" aria-pressed="true">Success</Button>
-              </Col>
-              <Col col="6" sm="4" md="2" xl className="mb-3 mb-xl-0">
-                <Button block outline active color="warning" aria-pressed="true">Warning</Button>
-              </Col>
-              <Col col="6" sm="4" md="2" xl className="mb-3 mb-xl-0">
-                <Button block outline active color="danger" aria-pressed="true">Danger</Button>
-              </Col>
-              <Col col="6" sm="4" md="2" xl className="mb-3 mb-xl-0">
-                <Button block outline active color="info" aria-pressed="true">Info</Button>
-              </Col>
-              <Col col="6" sm="4" md="2" xl className="mb-3 mb-xl-0">
-                <Button block outline active color="light" aria-pressed="true">Light</Button>
-              </Col>
-              <Col col="6" sm="4" md="2" xl className="mb-3 mb-xl-0">
-                <Button block outline active color="dark" aria-pressed="true">Dark</Button>
-              </Col>
-            </Row>
-            <Row className="align-items-center mt-3">
-              <Col col="12" xl className="mb-3 mb-xl-0">
-                Disabled
-              </Col>
-              <Col col="6" sm="4" md="2" xl className="mb-3 mb-xl-0">
-                <Button block outline color="primary" disabled>Primary</Button>
-              </Col>
-              <Col col="6" sm="4" md="2" xl className="mb-3 mb-xl-0">
-                <Button block outline color="secondary" disabled>Secondary</Button>
-              </Col>
-              <Col col="6" sm="4" md="2" xl className="mb-3 mb-xl-0">
-                <Button block outline color="success" disabled>Success</Button>
-              </Col>
-              <Col col="6" sm="4" md="2" xl className="mb-3 mb-xl-0">
-                <Button block outline color="warning" disabled>Warning</Button>
-              </Col>
-              <Col col="6" sm="4" md="2" xl className="mb-3 mb-xl-0">
-                <Button block outline color="danger" disabled>Danger</Button>
-              </Col>
-              <Col col="6" sm="4" md="2" xl className="mb-3 mb-xl-0">
-                <Button block outline color="info" disabled>Info</Button>
-              </Col>
-              <Col col="6" sm="4" md="2" xl className="mb-3 mb-xl-0">
-                <Button block outline color="light" disabled>Light</Button>
-              </Col>
-              <Col col="6" sm="4" md="2" xl className="mb-3 mb-xl-0">
-                <Button block outline color="dark" disabled>Dark</Button>
-              </Col>
-
-            </Row>
-          </CardBody>
-        </Card>
-        <Card>
-          <CardBody>
-            <Row className="align-items-center">
-              <Col col="2" className="mb-3 mb-xl-0 text-center">
-                <Button color="secondary" outline size="sm">Outline Button</Button>
-              </Col>
-            </Row>
-            <Row className="align-items-center mt-3">
-              <Col col="2" className="mb-3 mb-xl-0 text-center">
-                <Button outline color="secondary">Outline Button</Button>
-              </Col>
-
-            </Row>
-            <Row className="align-items-center mt-3">
-              <Col col="2" className="mb-3 mb-xl-0 text-center">
-                <Button outline color="secondary" size="lg">Outline Button</Button>
-              </Col>
-            </Row>
-          </CardBody>
-        </Card>
       </div>
     );
   }
