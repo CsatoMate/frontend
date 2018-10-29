@@ -109,6 +109,7 @@ class Buttons extends Component {
       devName: dev.name,
       authStatus: dev.auth === 'ENABLED',
       typeName: dev.type,
+      selectedID: dev.id,
     });
   }
 
@@ -154,9 +155,9 @@ class Buttons extends Component {
                   <Col col="10" xl className="mb-3 mb-xl-0">
                     <i className="fa fa-align-justify"/> DEVICES
                   </Col>
-                  <Col col="10" sm="3" md="3" className="mb-3 mb-xl-0">
+{/*                  <Col col="10" sm="3" md="3" className="mb-3 mb-xl-0">
                     <Button block outline color="primary" onClick={this.toggle}>Add device</Button>
-                  </Col>
+                  </Col>*/}
                 </Row>
               </CardHeader>
               <CardBody>
@@ -204,16 +205,6 @@ class Buttons extends Component {
                                      label
                                      defaultChecked={this.state.authStatus} onChange={this.setHandleAuth}/>
                         </Col>
-                        {/*                        <InputGroup>
-                          <InputGroupAddon addonType="prepend">
-                            <InputGroupText>Authentication:</InputGroupText>
-                          </InputGroupAddon>
-                          <InputGroupAddon addonType="append">
-                            <AppSwitch className={'mx-1 switch-lg'} variant={'pill'} color={'success'} outline={'alt'}
-                                       label
-                                       defaultChecked={this.state.chkbox}/>
-                          </InputGroupAddon>
-                        </InputGroup>*/}
                       </FormGroup>
                     </ModalBody>
                     <ModalFooter>
