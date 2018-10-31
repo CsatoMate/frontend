@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+/*import React, { Component } from 'react';
 import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader, Col, Row } from 'reactstrap';
 
 class Breadcrumbs extends Component {
@@ -45,3 +45,4 @@ class Breadcrumbs extends Component {
 }
 
 export default Breadcrumbs;
+*/

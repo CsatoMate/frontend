@@ -12,24 +12,30 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
+  FormGroup,
+  Form,
+  InputGroup,
+  Input,
+  InputGroupAddon,
+  InputGroupText,
+  Modal,
+  ModalBody,
+  ModalFooter,
+  ModalHeader,
 } from 'reactstrap';
-import Slider from 'react-rangeslider'
+//import Slider from 'react-rangeslider'
 
 import deviceData from "../Devices/DeviceData";
 import {AppSwitch} from "@coreui/react";
 
 
+
 function UserRow(props) {
   const device = props.device;
-  //const deviceLink = `#/users/${device.id}`;
 
   const getBadge = (status) => {
     return status === 'ENABLED' ? 'success' :
       status === 'DISABLED' ? 'secondary' : 'primary'
-    /*
-      status === 'Pending' ? 'warning' :
-        status === 'Banned' ? 'danger' :
-          'primary'*/
   };
 
   return (
@@ -50,22 +56,26 @@ class Controller extends Component {
 
     this.toggle = this.toggle.bind(this);
     this.state = {
-      dropdownOpen: new Array(19).fill(false),
-      sliderValue: 12.5,
-      authStatus: false,
-      dropItem: '',
+      dropdownOpen: false,
+      sliderValue: 22,
+      switchStatus: false,
+      sensor: '',
+      deviceName: 'Devices Dropdown',
+      tempUnit: '°C',
+
+      modalOpen: false,
     };
-    this.deviceList = deviceData;
+    this.deviceList = deviceData.filter((item) => item.auth === 'ENABLED');
     this.handleDropChange = this.handleDropChange.bind(this);
+    this.toggle = this.toggle.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
+    this.setModal = this.setModal.bind(this);
   }
 
-  toggle(i) {
-    const newArray = this.state.dropdownOpen.map((element, index) => {
-      return (index === i ? !element : false);
-    });
-    this.setState({
-      dropdownOpen: newArray,
-    });
+  toggle() {
+    this.setState(prevState => ({
+      dropdownOpen: !prevState.dropdownOpen
+    }));
   }
 
   handleChange = (value) => {
@@ -76,52 +86,117 @@ class Controller extends Component {
 
   handleDropChange(e) {
     console.log("DropItem: ", e.target.value);
+    let data = deviceData.filter((item) => item.id.toString() === e.target.value);
+    console.log("Data: ", data);
+    this.setState(prevState => ({
+      modalOpen: !prevState.modalOpen,
+      sensor: data[0].sensor,
+      deviceName: data[0].name,
+      sliderValue: data[0].value,
+      switchStatus: data[0].value === 'ON',
+      tempUnit: data[0].tempUnit
+    }))
+  }
 
-    this.setState({
-      dropItem: e.target.value
-    })
+  setModal(){
+    this.setState(prevState => ({
+      modalOpen: !prevState.modalOpen,
+    }));
   }
 
   deviceSetter(type) {
-    if (type === "TH16") {
+    if (type === "DS18B20") {
       return (
-        <div className='slider'>
-          <Slider
-            min={10}
-            max={50}
-            value={this.state.sliderValue}
-            step={0.5}
-            labels={{10: '10', 30: '30', 50: '50'}}
-            onChange={this.handleChange}
-          />
-          <div className='value' style={{
-            'textAlign': 'center',
-            'marginTop': '40px',
-            'fontWeight': 'bold',
-            'fontSize': '20px'
-          }}>{this.state.sliderValue} °C
-          </div>
-        </div>
+
+            <Form action="" method="post">
+              <Modal isOpen={this.state.modalOpen} toggle={this.setModal}
+                     className={'modal-primary ' + this.props.className}>
+                <ModalHeader toggle={this.setModal}>Modify values</ModalHeader>
+                <ModalBody>
+                  <FormGroup>
+                    <InputGroup>
+                      <InputGroupAddon addonType="prepend">
+                        <InputGroupText>Temperature:</InputGroupText>
+                      </InputGroupAddon>
+                      <Input type="text" id="tempMin" name="tempMin" placeholder="Min value"
+                             autoComplete="name" defaultValue={this.state.devName} onChange={this.setHandleName}/>
+                      <InputGroupAddon addonType="append">
+                        <InputGroupText>-</InputGroupText>
+                      </InputGroupAddon>
+                      <Input type="text" id="tempMax" name="tempMax" placeholder="Max value"
+                             autoComplete="name" defaultValue={this.state.devName} onChange={this.setHandleName}/>
+                      <InputGroupAddon addonType="append">
+                        <InputGroupText><i className="fa fa-thermometer-half"/></InputGroupText>
+                      </InputGroupAddon>
+                    </InputGroup>
+                  </FormGroup>
+óra formátumot kell keríteni meg bekötni
+                  <FormGroup>
+                    <InputGroup>
+                      <InputGroupAddon addonType="prepend">
+                        <InputGroupText>Time:</InputGroupText>
+                      </InputGroupAddon>
+                      <Input type="text" id="timeStart" name="timeStart" placeholder="Start time"
+                             autoComplete="name" defaultValue={this.state.devName} onChange={this.setHandleName}/>
+                      <InputGroupAddon addonType="append">
+                        <InputGroupText>-</InputGroupText>
+                      </InputGroupAddon>
+                      <Input type="text" id="timeEnd" name="timeEnd" placeholder="End time"
+                             autoComplete="name" defaultValue={this.state.devName} onChange={this.setHandleName}/>
+                      <InputGroupAddon addonType="append">
+                        <InputGroupText><i className="fa fa-clock-o"/></InputGroupText>
+                      </InputGroupAddon>
+                    </InputGroup>
+                  </FormGroup>
+
+                </ModalBody>
+                <ModalFooter>
+{/*                  <Button type="submit" color="primary" onClick={this.modifiyDevice.bind(this, this.state)}>Save</Button>{' '}
+                  <Button color="secondary" onClick={this.toggle}>Cancel</Button>*/}
+                </ModalFooter>
+              </Modal>
+            </Form>
+
+
+        /*        <div className='slider'>
+                  <Slider
+                    min={10}
+                    max={50}
+                    value={this.state.sliderValue}
+                    step={0.5}
+                    labels={{10: '10', 30: '30', 50: '50'}}
+                    onChange={this.handleChange}
+                  />
+                  <div className='value' style={{
+                    'textAlign': 'center',
+                    'marginTop': '40px',
+                    'fontWeight': 'bold',
+                    'fontSize': '20px'
+                  }}>{this.state.sliderValue} {this.state.tempUnit}
+                  </div>
+                </div>*/
       )
     }
 
-    if (type === "POW") {
+    if (type === "ENERGY") {
       return (
         <div className="row justify-content-center">
           <AppSwitch className={'mx-1 switch-lg'} variant={'pill'} color={'success'} outline={'alt'}
                      label
-                     defaultChecked={this.state.authStatus} onChange={console.log("változott")}/>
+                     defaultChecked={this.state.switchStatus}
+                     onChange={console.log("Változott: ", this.state.switchStatus)}/>
         </div>
       )
     }
     return null;
   }
 
+  onSubmit() {
+    console.log("Elküldve:", this.state);
+  }
+
   render() {
-    const deviceList = deviceData.filter((device) => device.id < 10);
-
     return (
-
       <div className="animated fadeIn">
         <Card className="col-md-6 offset-md-3">
           <CardHeader>
@@ -130,45 +205,24 @@ class Controller extends Component {
           <CardBody>
             <div className="row ">
               <div className="col-auto mr-auto">
-                <ButtonDropdown isOpen={this.state.dropdownOpen[0]} toggle={() => {
-                  this.toggle(0);
-                }}>
+                <ButtonDropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
                   <DropdownToggle caret>
-                    Devices Dropdown
+                    {this.state.deviceName}
                   </DropdownToggle>
                   <DropdownMenu right>
                     {this.deviceList.map((device) =>
                       <DropdownItem onClick={this.handleDropChange} key={device.id}
-                                    value={device.type} name={device.name}>{device.name}</DropdownItem>
+                                    value={device.id} name={device.name}>{device.name}</DropdownItem>
                     )}
-
-                    <DropdownItem value='TH16' onClick={this.handleDropChange}>TH16</DropdownItem>
-                    <DropdownItem value='POW' onClick={this.handleDropChange}>POW</DropdownItem>
                   </DropdownMenu>
                 </ButtonDropdown>
               </div>
-              <div className="col-auto"><Button type="submit" color="primary">Save</Button></div>
+              <div className="col-auto"><Button type="submit" color="primary" onClick={this.onSubmit}>Save</Button>
+              </div>
             </div>
 
-            {this.deviceSetter(this.state.dropItem)}
+            {this.deviceSetter(this.state.sensor)}
 
-{/*            <div className='slider'>
-              <Slider
-                min={10}
-                max={50}
-                value={this.state.sliderValue}
-                step={0.5}
-                labels={{10: '10', 30: '30', 50: '50'}}
-                onChange={this.handleChange}
-              />
-              <div className='value' style={{
-                'textAlign': 'center',
-                'marginTop': '40px',
-                'fontWeight': 'bold',
-                'fontSize': '20px'
-              }}>{this.state.sliderValue} °C
-              </div>
-            </div>*/}
           </CardBody>
         </Card>
 
@@ -176,7 +230,6 @@ class Controller extends Component {
           <Col className="col-md-6 offset-md-3">
             <Card>
               <CardHeader>
-                {/*<small className="text-muted">example</small>*/}
                 <Row className="align-items-center">
                   <Col col="10" xl className="mb-3 mb-xl-0">
                     <i className="fa fa-align-justify"/> DEVICES
@@ -198,7 +251,7 @@ class Controller extends Component {
                   </tr>
                   </thead>
                   <tbody>
-                  {this.deviceList.map((device, index) =>
+                  {deviceData.map((device, index) =>
                     <UserRow key={index} device={device}/>
                   )}
                   </tbody>

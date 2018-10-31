@@ -18,10 +18,10 @@ import {
   Input,
   InputGroupAddon,
   InputGroupText,
-  ButtonDropdown,
+  /*ButtonDropdown,
   DropdownToggle,
   DropdownMenu,
-  DropdownItem,
+  DropdownItem,*/
 } from 'reactstrap';
 
 import deviceData from "./DeviceData";
@@ -97,7 +97,7 @@ class Buttons extends Component {
 
   setHandleAuth(event){
     this.setState({
-      authStatus: event.target.checked
+      switchStatus: event.target.checked
     })
   }
 
@@ -107,7 +107,7 @@ class Buttons extends Component {
     this.setState({
       modal: !this.state.modal,
       devName: dev.name,
-      authStatus: dev.auth === 'ENABLED',
+      switchStatus: dev.auth === 'ENABLED',
       typeName: dev.type,
       selectedID: dev.id,
     });

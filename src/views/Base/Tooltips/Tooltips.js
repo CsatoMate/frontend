@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+/*import React, { Component } from 'react';
 import { Button, Card, CardBody, CardHeader, Tooltip, UncontrolledTooltip } from 'reactstrap';
 
 class TooltipItem extends React.Component {
@@ -128,4 +128,4 @@ class Tooltips extends Component {
   }
 }
 
-export default Tooltips;
+export default Tooltips;*/

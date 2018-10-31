@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+/*import React, { Component } from 'react';
 import { Alert, Card, CardBody, CardHeader, Col, Row } from 'reactstrap';
 
 class Alerts extends Component {
@@ -136,3 +136,4 @@ class Alerts extends Component {
 }
 
 export default Alerts;
+*/
