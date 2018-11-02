@@ -61,12 +61,14 @@ class Buttons extends Component {
       modal: false,
       devName: '',
       typeName: '',
+      sensorName: '',
       authStatus: false,
       dropdownOpen: false,
     };
     this.toggle = this.toggle.bind(this);
     this.toggleDrop = this.toggleDrop.bind(this);
     this.setHandleType = this.setHandleType.bind(this);
+    this.setHandleSensor = this.setHandleSensor.bind(this);
     this.setHandleName = this.setHandleName.bind(this);
     this.setHandleAuth = this.setHandleAuth.bind(this);
   }
@@ -86,6 +88,11 @@ class Buttons extends Component {
   setHandleType(event) {
     this.setState({
       typeName: event.target.value
+    });
+  }
+  setHandleSensor(event) {
+    this.setState({
+      sensorName: event.target.value
     });
   }
 
@@ -144,6 +151,45 @@ class Buttons extends Component {
 
   render() {
     const deviceList = deviceData.filter((device) => device.id < 10);
+    let sensors = null;
+    if(this.state.typeName === "TH16"){
+      sensors = (
+      <FormGroup>
+        <InputGroup>
+          <InputGroupAddon addonType="prepend">
+            <InputGroupText>Sensor type:</InputGroupText>
+          </InputGroupAddon>
+          <select className="form-control" name="sensorName" id="sensorName" value={this.state.sensorName}
+                  onChange={this.setHandleSensor}>
+            <option value="DS18B20">DS18B20</option>
+            <option value="DHT22">DHT22</option>
+          </select>
+          <InputGroupAddon addonType="append">
+            <InputGroupText><i className="fa fa-reddit-alien"/></InputGroupText>
+          </InputGroupAddon>
+        </InputGroup>
+      </FormGroup>
+      )
+    }
+    if(this.state.typeName === "POW"){
+      sensors = (
+        <FormGroup>
+          <InputGroup>
+            <InputGroupAddon addonType="prepend">
+              <InputGroupText>Sensor type:</InputGroupText>
+            </InputGroupAddon>
+            <select className="form-control" name="sensorName" id="sensorName" value={this.state.sensorName}
+                    onChange={this.setHandleSensor}>
+              <option value="Energy">Energy</option>
+            </select>
+            <InputGroupAddon addonType="append">
+              <InputGroupText><i className="fa fa-reddit-alien"/></InputGroupText>
+            </InputGroupAddon>
+          </InputGroup>
+        </FormGroup>
+      )
+    }
+
     return (
 
       <div className="animated fadeIn">
@@ -193,6 +239,7 @@ class Buttons extends Component {
                           </InputGroupAddon>
                         </InputGroup>
                       </FormGroup>
+                      {sensors}
                       <FormGroup row>
                         <Col md="4">
                           <InputGroup>
